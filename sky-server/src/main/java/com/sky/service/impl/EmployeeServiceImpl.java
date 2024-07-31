@@ -80,11 +80,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         //将实体类剩下属性进行赋值操作
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
         employee.setStatus(StatusConstant.ENABLE);//启用用户
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-        //
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
+//        //
+//        employee.setCreateUser(BaseContext.getCurrentId());
+//        employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.Insert(employee);
 
     }
@@ -116,4 +116,26 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeMapper.Update(employee);
     }
 
+    /**
+     * 根据员工id查询员工
+     * @param id
+     */
+    @Override
+    public Employee getById(Long id) {
+        Employee emp = employeeMapper.getById(id);
+        emp.setPassword("****");
+        return emp;
+    }
+
+    /**
+     * 修改员工信息
+     * @param employeeDTO
+     */
+    @Override
+    public void Update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);//Mapper层使用的更新操作是个通用代码 需要Employee类对象 之间使用拷贝
+//        employee.setUpdateTime(LocalDateTime.now());
+        employeeMapper.Update(employee);
+    }
 }
