@@ -69,6 +69,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 新增员工
+     *
      * @param employeeDTO
      */
     @Override
@@ -90,14 +91,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      * 分页查询员工
+     *
      * @param employeePageQueryDTO
      * @return
      */
     @Override
     public PageResult query(EmployeePageQueryDTO employeePageQueryDTO) {
         PageHelper.startPage(employeePageQueryDTO.getPage(), employeePageQueryDTO.getPageSize());
-        Page<Employee> page= employeeMapper.pageQuery(employeePageQueryDTO);
+        Page<Employee> page = employeeMapper.pageQuery(employeePageQueryDTO);
         return new PageResult(page.getTotal(), page.getResult());
+    }
+
+    /**
+     * 启禁用员工
+     *
+     * @param status
+     * @param id
+     */
+    @Override
+    public void StartOrStop(Integer status, Long id) {
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id).build();//更新员工属性操作使用builder 这样以后更改其他属性就可以增添相应属性值就行 利于维护
+        employeeMapper.Update(employee);
     }
 
 }
