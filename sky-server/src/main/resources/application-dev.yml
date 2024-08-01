@@ -7,11 +7,12 @@ sky:
     username: root
     password: 1234
   alioss:
-    endpoint: os.getenv("endpoint")
-
-    access-key-id: os.getenv("access-key-id")
-
-    access-key-secret: os.getenv("access-key-secret")
-
-    bucket-name: os.getenv("bucket-name")
+#    endpoint: os.getenv("endpoint")
+    endpoint: cn-shanghai.oss.aliyuncs.com
+#      access-key-id: os.getenv("access-key-id")
+    access-key-id: LTAI5tLuSLcLwJBLXE7mRD7S
+#      access-key-secret: os.getenv("access-key-secret")
+    access-key-secret: G6opVhHCxT4z7PuqbdwIWoohg4WTUg
+#      bucket-name: os.getenv("bucket-name")
+    bucket-name: sky-itcast19990417
 
